@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Phonebook — Fetch API Demo</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div>
+        <h1>Phonebook</h1>
+        <div class="muted small">Add, search, update and delete contacts (demo using async JS)</div>
+      </div>
+      <div class="controls-row">
+        <div class="chip" id="countChip">0 contacts</div>
+        <button class="secondary" id="seedBtn" title="Load sample contacts">Load sample</button>
+      </div>
+    </header>
+
+    <div class="grid">
+      <div class="card">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+          <strong>Contacts</strong>
+          <div class="search-input">
+            <input id="search" placeholder="Search by name or phone" />
+            <button id="clearSearch" class="btn-icon" title="Clear">✕</button>
+          </div>
+        </div>
+
+        <div class="table-wrap" id="listWrap">
+          <table id="contactsTable" aria-live="polite">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Phone</th>
+                <th class="small">Notes</th>
+                <th style="width:140px">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="contactsBody"></tbody>
+          </table>
+        </div>
+
+        <div id="emptyState" class="empty" style="display:none">
+          No contacts yet. Add a contact using the form on the right.
+        </div>
+        <div class="footer-note">
+          This demo uses a simulated Fetch API and stores data in your browser's localStorage. 
+          Replace the API functions to use a real back end.
+        </div>
+      </div>
+
+      <aside class="card">
+        <strong id="formTitle">Add contact</strong>
+        <form id="contactForm" autocomplete="off" novalidate>
+          <div class="row">
+            <label for="name">Name</label>
+            <input type="text" id="name" required placeholder="Full name" />
+          </div>
+          <div class="row">
+            <label for="phone">Phone</label>
+            <input type="tel" id="phone" required placeholder="+91 98765 43210" />
+          </div>
+          <div class="row">
+            <label for="notes">Notes</label>
+            <input type="text" id="notes" placeholder="Optional notes (email, company...)" />
+          </div>
+
+          <div style="display:flex;justify-content:space-between;gap:8px;margin-top:12px">
+            <button id="saveBtn">Add contact</button>
+            <button type="button" id="resetBtn" class="secondary">Reset</button>
+          </div>
+          <input type="hidden" id="editingId" value="" />
+        </form>
+
+        <hr style="margin:14px 0;border:none;border-top:1px solid #f1f6ff" />
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <button id="exportBtn" class="secondary">Export JSON</button>
+          <button id="importBtn" class="secondary">Import JSON</button>
+          <button id="clearAllBtn" class="btn-danger" style="color:#fff">Clear all</button>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <div id="modalRoot" style="display:none"></div>
+  <div id="toast" style="display:none" class="toast"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
